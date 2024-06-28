@@ -1,13 +1,13 @@
 import mysql from "mysql2"
 import config from "../Config.js"
 
-class CategoriaModel {
+class DoceModel {
     constructor() {
         this.conexao = mysql.createConnection(config.db)
         console.debug("Conectado")
     }
-    create(nome_categoria) {
-        let sql = `INSERT INTO categorias (nome_categoria) VALUES("${nome_categoria}");`
+    create(nome_doce,id_categoria) {
+        let sql = `INSERT INTO doces (nome_doce,id_categoria) VALUES("${nome_doce}}",("${id_categoria}");`
 
         return new Promise((resolve, reject) => {
             this.conexao.query(sql, (erro,retorno) => {
@@ -15,12 +15,12 @@ class CategoriaModel {
                     console.debug(erro)
                     reject([400, erro])
                 }
-                resolve([201, "Categoria inserida"])
+                resolve([201, "Doce inserido"])
             })
         });
     }
     read() {
-        let sql = `SELECT * FROM categorias;`
+        let sql = `SELECT * FROM doces;`
 
         return new Promise((resolve, reject) => {
             this.conexao.query(sql, (erro, retorno) => {
@@ -32,8 +32,8 @@ class CategoriaModel {
             })
         });
     }
-    update(id_categoria, nome_categoria) {
-        let sql = `UPDATE categorias SET nome="${nome_categoria}" WHERE id_categoria="${id_categoria}";`
+    update(id_doce,nome_doce, id_categoria) {
+        let sql = `UPDATE doces SET nome_doce="${nome_doce}"id_categoria="${id_categoria}" WHERE id_doce "${id_doce}";`
 
         return new Promise((resolve, reject) => {
             this.conexao.query(sql, (erro,retorno) => {
@@ -41,7 +41,7 @@ class CategoriaModel {
                     console.debug(erro)
                     reject([400, erro])
                 }
-                resolve([200, "Atualizado"])
+                resolve([200, " Doce Atualizado"])
             })
         });
     }
@@ -64,4 +64,4 @@ class CategoriaModel {
 
 
 
-export default new CategoriaModel();
+export default new DoceModel();
